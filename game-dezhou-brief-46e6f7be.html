@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德州扑克游戏 · 日常查询与对照</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(145deg, #f7ede0 0%, #f0d9c0 55%, #e5c4a6 100%);
+            min-height: 100vh;
+            padding: 2.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #3e2f25;
+        }
+        .page-wrapper {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* 白色卡片容器 —— 层次、呼吸感 */
+        .card {
+            background: #fffffffa;
+            backdrop-filter: blur(1px);
+            border-radius: 40px 16px 40px 16px;
+            box-shadow: 0 12px 28px rgba(94, 60, 30, 0.12), 0 4px 12px rgba(0,0,0,0.03);
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2.5rem;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 16px 32px rgba(82, 52, 26, 0.16);
+        }
+
+        /* hero 区 —— 暖色呼吸感 */
+        .hero {
+            text-align: center;
+            padding: 3.2rem 1.8rem 2.6rem;
+            background: linear-gradient(to left bottom, #fff6ed, #fbead9);
+            border-bottom: 3px solid #dbb694;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 550;
+            letter-spacing: -0.02em;
+            color: #4f3422;
+            margin-bottom: 0.75rem;
+        }
+        .hero .sub {
+            font-size: 1.25rem;
+            color: #6e503a;
+            max-width: 580px;
+            margin: 0 auto 2rem;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #e0c4a8;
+            padding: 0.4rem 1.6rem;
+            border-radius: 60px;
+            color: #3d2a1b;
+            font-weight: 470;
+            font-size: 0.95rem;
+        }
+
+        /* 两栏/灵活布局 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .card {
+                padding: 2rem 1.4rem;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 520;
+            margin-bottom: 0.9rem;
+            color: #4a3424;
+            border-left: 6px solid #c8a27b;
+            padding-left: 1rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 480;
+            margin: 1.2rem 0 0.3rem;
+            color: #4c3827;
+        }
+        p {
+            margin-bottom: 1.1rem;
+        }
+
+        /* 按钮感链接 —— 圆角、温暖 */
+        .btn-link {
+            display: inline-block;
+            background: #dbb694;
+            color: #2f2017;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.55rem 1.8rem;
+            border-radius: 60px;
+            transition: background 0.2s, transform 0.1s;
+            border: 1px solid #cba27e;
+            box-shadow: 0 2px 6px rgba(128, 80, 40, 0.08);
+            margin: 0.3rem 0 0.2rem;
+        }
+        .btn-link:hover {
+            background: #e2c2a2;
+            transform: scale(1.02);
+        }
+        .btn-link:active {
+            transform: scale(0.97);
+        }
+
+        /* 内嵌链接（句子中） */
+        a.text-link {
+            color: #845d3f;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #c8a27b;
+            font-weight: 470;
+            transition: color 0.15s;
+        }
+        a.text-link:hover {
+            color: #583d28;
+            text-decoration-color: #9c7a5a;
+        }
+
+        /* FAQ 摘要卡片风格 */
+        .faq-item {
+            padding: 1rem 0.9rem;
+            border-bottom: 1px dashed #dccbbb;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 520;
+            color: #4b3424;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .faq-a {
+            color: #4f3c2d;
+            padding-left: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem 3rem;
+            padding: 1.5rem 0 0.2rem;
+        }
+        .footer-links a {
+            color: #4b3524;
+            text-decoration: none;
+            border-bottom: 2px solid #cba27e;
+            padding-bottom: 2px;
+            font-weight: 440;
+        }
+        .footer-links a:hover {
+            border-bottom-color: #7d5d41;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #dcc4ae;
+            margin: 0.8rem 0 1.2rem;
+            opacity: 0.5;
+        }
+
+        .note-sm {
+            font-size: 0.9rem;
+            color: #6b5846;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- HERO 区：落地页第一印象 -->
+    <div class="card hero">
+        <span class="tagline">📋 日常对照 · 延伸阅读</span>
+        <h1>德州扑克 &nbsp;·&nbsp; 从熟悉到细读</h1>
+        <p class="sub">手牌范围、位置思考、底池计算…… 每次翻看都有新发现。</p>
+        <div style="margin-top: 1.4rem;">
+            <a href="https://game-dezhou.com" class="btn-link">德州扑克游戏</a>
+        </div>
+        <p style="max-width:520px; margin:1.4rem auto 0; font-size:0.95rem; color:#5e4633;">
+            不是每一次都需要深究，但当你需要对照细节或快速查阅—— 一个安静的参考页就在手边。
+        </p>
+    </div>
+
+    <!-- 优势区 + 说明区 (左右更灵活) -->
+    <div class="grid-2">
+        <!-- 优势区：日常查询视角 -->
+        <div class="card">
+            <h2>为什么需要随手对照</h2>
+            <p>玩牌的时候，思路往往卡在某个场景：<br>
+            “这手牌在翻牌圈该怎么处理？” 或者 “位置对我的范围影响有多大？”<br>
+            与其翻找零散笔记，不如打开 <a href="https://game-dezhou.com" class="text-link">德州扑克游戏</a> 页面—— 把常见情形、位置表格、底池赔率参考放在一处。
+            </p>
+            <h3>📌 三个常用场景</h3>
+            <ul style="list-style-type: '· '; padding-left: 1.5rem; margin-bottom: 0.8rem;">
+                <li><strong>翻前范围记忆</strong> – 不同位置应该玩哪些起手牌，对照表格一目了然。</li>
+                <li><strong>下注尺度对照</strong> – 底池比例、诈唬与价值下注的参考数值。</li>
+                <li><strong>常见翻牌结构</strong> – 连牌、同花、对子面，快速回顾策略偏向。</li>
+            </ul>
+            <p class="note-sm">这些内容并非固定答案，而是提供一种思考框架，帮助你在牌局中更稳地做决定。</p>
+        </div>
+
+        <!-- 说明区：从延伸阅读切入 -->
+        <div class="card">
+            <h2>延伸阅读 · 不止于基础</h2>
+            <p>很多玩家在熟悉规则后，会开始关注更细致的层面：范围构建、剥削倾向、平衡与频率。而 <a href="https://game-dezhou.com" class="text-link">德州扑克游戏</a> 的页面上，整理了从入门到进阶的常见知识点，适合在复盘之后翻一翻。</p>
+            <h3>🌿 生活化的牌桌思维</h3>
+            <p>不需要每次都把牌谱背下来。当你和朋友聊起某手牌，或者独自回想一手关键对局，打开页面找一找相似案例，往往比硬记更自然。</p>
+            <hr>
+            <p><span style="background: #e8d3c0; padding:0.2rem 0.9rem; border-radius:30px; font-size:0.9rem;">🧩 提示</span> 把页面当作备忘录，而不是教科书。用你自己的语言去理解那些表格和概念。</p>
+        </div>
+    </div>
+
+    <!-- 说明区扩展：额外卡片 (日常场景) -->
+    <div class="card" style="padding-top: 1.8rem; padding-bottom: 2rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 2rem; justify-content: space-between;">
+            <div style="flex: 1 1 200px;">
+                <h3 style="margin-top:0;">📋 快速索引</h3>
+                <p>手牌强度、听牌概率、位置缩写——把零散概念集中在一页，减少来回搜索的疲劳。</p>
+            </div>
+            <div style="flex: 1 1 200px;">
+                <h3 style="margin-top:0;">🧠 对照而非死记</h3>
+                <p>每次看同一张表格，都可能因为实战经验不同而有新理解。保存一个参考页，让它陪你成长。</p>
+            </div>
+            <div style="flex: 1 1 200px;">
+                <h3 style="margin-top:0;">📎 简单的入口</h3>
+                <p>如果你还没收藏，现在可以把 <a href="https://game-dezhou.com" class="text-link">德州扑克游戏</a> 放到书签栏。下次和朋友讨论时，随手就能打开对照。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区  (真实语气，不夸张) -->
+    <div class="card">
+        <h2>常见疑问 · 摘要</h2>
+        <div class="faq-item">
+            <span class="faq-q">❓ 这个页面适合什么水平的玩家？</span>
+            <div class="faq-a">内容覆盖新手到中等水平。进阶玩家也可以把它当作快速参考，很多细节以条目形式呈现，方便定位。</div>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">❓ 需要注册或登录吗？</span>
+            <div class="faq-a">不需要。整个页面是开放的参考内容，直接打开就能浏览各种牌局相关说明。</div>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">❓ 页面内容会更新吗？</span>
+            <div class="faq-a">会基于常见的玩家问题和策略讨论进行补充，保持信息的实用性。你可以时常回来看一眼。</div>
+        </div>
+        <div class="faq-item" style="border-bottom: none;">
+            <span class="faq-q">❓ 为什么叫“对照”而不是教学？</span>
+            <div class="faq-a">因为牌局千变万化，没有万能公式。这里更偏向提供结构化的思路和常用数据，帮助你形成自己的判断。</div>
+        </div>
+        <p style="margin-top: 1.2rem; text-align: right; font-size: 0.95rem;">—— 更多细节直接去 <a href="https://game-dezhou.com" class="text-link">德州扑克游戏</a> 页面浏览</p>
+    </div>
+
+    <!-- 底部链接：生活化，不重复锚文本 -->
+    <div class="card" style="padding: 1.5rem 2rem; text-align: center; background: #fefaf7;">
+        <div class="footer-links">
+            <a href="https://game-dezhou.com">德州扑克游戏</a>
+            <a href="https://game-dezhou.com">德州扑克游戏</a>
+            <a href="https://game-dezhou.com">德州扑克游戏</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #6c5846;">日常查询与延伸 · 一份安静的牌桌手册</p>
+    </div>
+
+</div>
+</body>
+</html>
